@@ -1,13 +1,15 @@
 package supertv.cluster.api;
 
-import java.util.Map;
+import javax.ejb.Local;
+import java.util.Set;
 
 /**
  * Created by tanerka on 17.10.2017.
  */
+@Local
 public interface ClusterService {
 
-    ClusterInstance registerNode(String nodeType, Map<String, Object> attributes, boolean needMastership);
+    ClusterInstance registerNode(String nodeType, Set<ClusterRestService> restServices, boolean needMastership);
 
 
 }
