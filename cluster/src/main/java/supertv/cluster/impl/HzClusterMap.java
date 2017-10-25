@@ -1,4 +1,4 @@
-package supertv.cluster.core;
+package supertv.cluster.impl;
 
 
 import supertv.cluster.api.ClusterMap;

@@ -1,4 +1,5 @@
-package supertv.cluster.core;
+package supertv.cluster.impl;
+
 
 import com.hazelcast.core.Message;
 import com.hazelcast.core.MessageListener;

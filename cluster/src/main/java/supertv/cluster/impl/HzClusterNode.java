@@ -1,4 +1,4 @@
-package supertv.cluster.core;
+package supertv.cluster.impl;
 
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.Member;
@@ -48,6 +48,8 @@ public class HzClusterNode implements ClusterNode {
     public void setMastership(Mastership mastership) {
         this.mastership = mastership;
     }
+
+    public Member getMember() {return this.member;}
 
     public HazelcastInstance getHzInstance() {
         return hzInstance;

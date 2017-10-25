@@ -10,10 +10,12 @@ public interface ClusterInstance {
     Set<ClusterNode> getAllNodesByType(String type);
     Set<ClusterNode> getAllClusterNodes();
     ClusterNode getClusterNodeById(String nodeId);
+    Set<ClusterRestService> getServiceListByNodeId(String nodeId);
     ClusterNode getMasterNode(String type);
     ClusterNode getLocalNode();
 
     ClusterMap getMap(String mapName);
+    Boolean isMastershipNeeded(String nodeType);
     ClusterTopic getTopic(String topicName);
 
     String registerClusterNodeListener(ClusterNodeListener listener);

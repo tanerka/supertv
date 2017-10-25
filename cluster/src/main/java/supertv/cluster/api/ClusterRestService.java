@@ -1,22 +1,21 @@
 package supertv.cluster.api;
 
+import java.io.Serializable;
+
 /**
  * Created by tanerka on 24.10.2017.
  */
-public class ClusterRestService {
+public class ClusterRestService implements Serializable{
 
-    enum OPERATION {
-        GET, POST, DELETE, PUT
-    }
 
     private String path;
     private String version;
-    private OPERATION operation;
+    private int httpPort;
 
-    public ClusterRestService(String path, String version, OPERATION operation) {
+    public ClusterRestService(String path, String version, int httpPort) {
         this.path = path;
         this.version = version;
-        this.operation = operation;
+        this.httpPort = httpPort;
     }
 
     public String getPath() {
@@ -35,11 +34,12 @@ public class ClusterRestService {
         this.version = version;
     }
 
-    public OPERATION getOperation() {
-        return operation;
+    public int getHttpPort() {
+        return httpPort;
     }
 
-    public void setOperation(OPERATION operation) {
-        this.operation = operation;
+    public void setHttpPort(int httpPort) {
+        this.httpPort = httpPort;
     }
+
 }

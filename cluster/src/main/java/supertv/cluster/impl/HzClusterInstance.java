@@ -1,8 +1,7 @@
-package supertv.cluster.core;
+package supertv.cluster.impl;
 
 import com.hazelcast.core.*;
 import supertv.cluster.api.*;
-
 
 import java.util.HashSet;
 import java.util.Set;
@@ -24,6 +23,8 @@ public class HzClusterInstance implements ClusterInstance {
         this.nodeId = nodeId;
         this.nodeType = nodeType;
         this.needMastership = needMastership;
+        IMap map = hzInstance.getMap("NeedMastershipMap");
+        map.put(nodeType, needMastership);
         hzInstance.getCluster().addMembershipListener(new InternalHzMemberListener());
         mastershipCheck();
     }
@@ -64,6 +65,25 @@ public class HzClusterInstance implements ClusterInstance {
     }
 
     @Override
+    public Set<ClusterRestService> getServiceListByNodeId(String nodeId) {
+        HzClusterNode node = (HzClusterNode)getClusterNodeById(nodeId);
+
+        if(node==null){
+            System.out.println("====== No node found with id : "+nodeId);
+            return null;
+        }
+        Set<ClusterRestService> restServices = (Set<ClusterRestService>)node.getMember().getAttributes().get(HzClusterService.ATT_REST_SERVICES);
+        if(restServices==null){
+            System.out.println("====== Rest services is null: "+restServices);
+        }else {
+            System.out.println("====== Rest services size: "+restServices.size());
+        }
+
+        return restServices;
+
+    }
+
+    @Override
     public ClusterNode getMasterNode(String type) {
         Set<ClusterNode> custerNodeSet = getAllNodesByType(type);
         for(ClusterNode node : custerNodeSet){
@@ -83,6 +103,13 @@ public class HzClusterInstance implements ClusterInstance {
     @Override
     public ClusterMap getMap(String mapName) {
         return new HzClusterMap(hzInstance.getMap(mapName));
+    }
+
+    @Override
+    public Boolean isMastershipNeeded(String nodeType) {
+        IMap map = hzInstance.getMap("NeedMastershipMap");
+        Object obj = map.get(nodeType);
+        return obj == null ? Boolean.FALSE : (Boolean)obj;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package supertv.cluster.core;
+package supertv.cluster.impl;
 
 import com.hazelcast.config.Config;
 import com.hazelcast.config.MemberAttributeConfig;
@@ -8,7 +8,6 @@ import com.hazelcast.core.Member;
 import supertv.cluster.api.ClusterInstance;
 import supertv.cluster.api.ClusterRestService;
 import supertv.cluster.api.ClusterService;
-
 
 import javax.ejb.Singleton;
 import java.util.HashMap;

@@ -11,12 +11,9 @@
 
     <groupId>supertv</groupId>
     <artifactId>cluster</artifactId>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
-    <modules>
-        <module>cluster-api</module>
-        <module>cluster-core</module>
-    </modules>
+
     <dependencies>
         <dependency>
             <groupId>javax</groupId>
@@ -24,6 +21,12 @@
             <version>7.0</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>com.hazelcast</groupId>
+            <artifactId>hazelcast</artifactId>
+            <version>3.8.6</version>
+        </dependency>
+
     </dependencies>
 
 
